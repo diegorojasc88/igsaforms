@@ -6,7 +6,7 @@ function LabelInput(props) {
     const localid = props.id;
     return (
         <div>
-            <div className="col-sm-2"><label htmlFor={localid}>{props.label}</label>
+            <div className="col-sm-4"><label htmlFor={localid}>{props.label}</label>
                 <input type="text" onChange={props.onChange} className="form-control" value={form[localid]} name={localid} />
             </div>
         </div>

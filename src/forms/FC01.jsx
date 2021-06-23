@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { toast } from 'react-toastify';
 import CheckBoxInput from '../components/CheckBoxInput';
 import CollapseCard1 from '../components/CollapseCard1';
 import CollapseCard2 from '../components/CollapseCard2';
@@ -35,7 +36,9 @@ function FC01(props) {
 
     const writeOnFB = async (form) => {
         await db.collection('IGSAForms').doc().set(form)
-        console.log("nueva tarea agregada");
+        toast('Formulario agregado', {
+            type: 'success'
+        })
     }
 
     return (
