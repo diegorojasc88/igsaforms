@@ -5,7 +5,7 @@ export const negroClaro = "#33333b";
 export const grisOscuro = "#9c9c9d";
 export const grisClaro = "#adadae";
 export const c = {
-    FC01: 'I-07-I-14-R-01 MUESTERO',
+    FC01: 'I-07-I-14-R-01 MUESTREO',
     FC02: 'I-16-I-30-I-32-I-37-R-01 CONCRETO FRESCO',
     FC03: 'I-21-R-01 DENSIMETRIA CAMPO',
     FC04: 'I-21-R-02 ESTANDARIZACION',

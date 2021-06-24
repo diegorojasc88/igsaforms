@@ -5,9 +5,7 @@ import { Link } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 import { c } from '../constants';
 
-import FormContext from '../contexts/FormContext';
-
-function MainScreen() {
+function MainScreen(props) {
     const [formsTitles, setFormsTitles] = useState([]);
     const [loading, setLoading] = useState(false);
     let history = useHistory();
@@ -15,7 +13,7 @@ function MainScreen() {
     const editForm = async (id, formType) => {
         console.log('Entra a funcion editForm');
         const querySnapshot = await db.collection('IGSAForms').doc(id).get();
-        setForm(querySnapshot.data());
+        props.setForm(querySnapshot.data());
 
         let ruta = "/".concat(formType);
         history.push(ruta);
