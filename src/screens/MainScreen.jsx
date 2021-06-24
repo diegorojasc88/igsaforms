@@ -1,9 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../Firebase';
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import { c } from '../constants';
+
+import FormContext from '../contexts/FormContext';
 
 function MainScreen() {
     const [formsTitles, setFormsTitles] = useState([]);
+    const [loading, setLoading] = useState(false);
+    let history = useHistory();
+
+    const editForm = async (id, formType) => {
+        console.log('Entra a funcion editForm');
+        const querySnapshot = await db.collection('IGSAForms').doc(id).get();
+        setForm(querySnapshot.data());
+
+        let ruta = "/".concat(formType);
+        history.push(ruta);
+    };
 
     const deleteForm = async (id) => {
         if (window.confirm('Presione aceptar para elimnar este formulario')) {
@@ -24,40 +40,54 @@ function MainScreen() {
         })
     }*/
     const getData = async () => {
+        setLoading(true);
         db.collection('IGSAForms').onSnapshot((querySnapshot) => {
             let docs = [];
             querySnapshot.forEach(doc => {
                 let temp = doc.data().f01i1;
-                docs.push({ titulo: temp, id: doc.id });
+                let temp2 = doc.data().formType;
+                docs.push({ titulo: temp, id: doc.id, formType: temp2 });
                 //docs.push({ ...doc.data(), id: doc.id }); CON ESTA INSTRUCCION AGARRA TODO EL OBJETO Y LE AGREGA EL ID
             });
             setFormsTitles(docs);
             //console.log(docs);
         })
+        setLoading(false);
     }
     useEffect(() => {
-        getData();
+        try {
+            getData();
+            return () => {
+                setFormsTitles([]);
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }, []);
-    return (
-        <div>
-            <div className="col-md-8">
-                {formsTitles.map(aForm => (
-                    <div className="card mb-1" key={aForm.id}>
-                        <div className="card-body">
-                            <div className="d-flex justify-content-between">
-                                <h4>{aForm.titulo}</h4>
-                                <div>
-                                    <i className="material-icons text-danger" onClick={() => deleteForm(aForm.id)}>close</i>
-                                    <i className="material-icons" onClick={() => deleteForm(aForm.id)}>create</i>
-                                </div>
 
+    if (loading) {
+        return <h2>Cargando Datos...</h2>
+    }
+
+    return (
+        <div className="col-md-8">
+            {formsTitles.map(aForm => (
+                <div className="card mb-1" key={aForm.id}>
+                    <div className="card-body">
+                        <div className="d-flex justify-content-between">
+                            <h4>{aForm.titulo}</h4>
+                            <div>
+                                <i className="material-icons text-danger" onClick={() => deleteForm(aForm.id)}>close</i>
+                                <i className="material-icons" onClick={() => editForm(aForm.id, aForm.formType)}>create</i>
                             </div>
-                            <p>{aForm.id}</p>
-                            <a href="{/*TODO* PONER AQUI LA RUTA O METODO PARA ACCEDER A LA FORM/}">IR A FORM *TODO*</a>
+
                         </div>
+                        <p>{aForm.id}</p>
+                        <h5>{c[aForm.formType]}</h5>
+                        <Link to="/create">To Form</Link>
                     </div>
-                ))}
-            </div>
+                </div>
+            ))}
         </div>
     )
 }

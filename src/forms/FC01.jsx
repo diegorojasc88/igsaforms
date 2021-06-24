@@ -13,6 +13,8 @@ import { db } from '../Firebase';
 
 
 function FC01(props) {
+
+    const formType = "FC01";
     const initialState = {
         f01i1: '',
         f01i2: '',
@@ -24,7 +26,7 @@ function FC01(props) {
 
     const handleInputChange = e => {
         const { name, value } = e.target;
-        setForm({ ...form, [name]: value })
+        setForm({ ...form, [name]: value, 'formType': formType })
     }
 
     const handleSubmit = e => {
