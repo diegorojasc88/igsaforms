@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import CheckBoxInput from '../components/CheckBoxInput';
 import CollapseCard1 from '../components/CollapseCard1';
@@ -16,20 +16,26 @@ import logo3 from "../img/fc01img3-193px.png";
 import FormContext from '../contexts/FormContext';
 import { useHistory } from "react-router-dom";
 
-
 function FC01(props) {
 
     const { form } = useContext(FormContext);
     let history = useHistory();
+    const [rand, setRand] = useState(0);
 
     const formType = "FC01";
     const initialState = {
+        rand: 0,
         idObs: '',
         f01i01: '',
         f01i02: '',
         f01i03: '',
         f01i04: '',
     };
+
+
+    useEffect(() => {
+        setRand(randomNumberGenerator());
+    }, []);
 
     const randomNumberGenerator = () => {
         return ((Math.floor(Math.random() * 998 + 1)) / 1000);
@@ -202,11 +208,11 @@ function FC01(props) {
                 />
                 <div style={{ display: "flex", flexDirection: "column", margin: "10px 30px" }}>
                     <label>Observaciones</label>
-                    <textarea id="idObs" name="observaciones" placeholder="" style={{ height: "90px" }}></textarea>
+                    <textarea id="idObs" name="observaciones" placeholder="" style={{ height: "90px" }} onChange={handleInputChange}></textarea>
 
                 </div>
 
-                <h3>Número Aleatorio: {randomNumberGenerator()}</h3>
+                <h3>Número Aleatorio: {rand}</h3>
                 <div style={styles.imageContainer} >
                     <img src={logo1} className="img-fluid" width='100%' style={styles.img} alt="logo" />
                 </div>
