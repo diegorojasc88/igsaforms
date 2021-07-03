@@ -42,9 +42,11 @@ function MainScreen(props) {
         db.collection('IGSAForms').onSnapshot((querySnapshot) => {
             let docs = [];
             querySnapshot.forEach(doc => {
-                let temp = doc.data().f01i1;
-                let temp2 = doc.data().formType;
-                docs.push({ titulo: temp, id: doc.id, formType: temp2 });
+                let temp1 = doc.data().f01i04;
+                let temp2 = doc.data().f01i05;
+                let temp = temp1 + " " + temp2;
+                let temp3 = doc.data().formType;
+                docs.push({ titulo: temp, id: doc.id, formType: temp3 });
                 //docs.push({ ...doc.data(), id: doc.id }); CON ESTA INSTRUCCION AGARRA TODO EL OBJETO Y LE AGREGA EL ID
             });
             setFormsTitles(docs);

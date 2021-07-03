@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import * as k from '../constants';
 
 function NavBar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav style={styles.navbar} className="navbar navbar-expand-lg navbar-dark">
             <Link className="navbar-brand" to="/">Formularios IGSA</Link>
 
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,5 +29,16 @@ function NavBar() {
         </nav>
     )
 }
+
+const styles = {
+    img: {
+        display: "flex",
+        alignSelf: 'center​',
+    },
+
+    navbar: {
+        backgroundColor: k.naranjaOscuro,
+    }
+};
 
 export default NavBar

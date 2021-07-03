@@ -15,6 +15,8 @@ function CheckBoxInput(props) {
                     {props.o4}</label></div>}
                 {props.i5 && <div className="col-sm-2"><label className="checkbox-inline"><input type="checkbox" id={props.i5} name={props.i5} />
                     {props.o5}</label></div>}
+                {props.i6 && <div className="col-sm-2"><label className="checkbox-inline"><input type="checkbox" id={props.i6} name={props.i6} />
+                    {props.o6}</label></div>}
             </div>
         </div>
     )

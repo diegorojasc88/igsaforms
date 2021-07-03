@@ -4,6 +4,9 @@ export const negroOscuro = "#17171f";
 export const negroClaro = "#33333b";
 export const grisOscuro = "#9c9c9d";
 export const grisClaro = "#adadae";
+export const blancoOscuro = "#f6f6f6";
+export const rojo = "#ff0000";
+export const verde = "#29a329"
 export const c = {
     FC01: 'I-07-I-14-R-01 MUESTREO',
     FC02: 'I-16-I-30-I-32-I-37-R-01 CONCRETO FRESCO',
